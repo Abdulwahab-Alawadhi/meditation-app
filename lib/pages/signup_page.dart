@@ -65,7 +65,7 @@ class SignupPage extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                    onPressed: () => (context.pushNamed("signup")),
+                    onPressed: () => (context.pushNamed("home")),
                     child: Text("Register")),
                 SizedBox(height: 25),
                 RichText(

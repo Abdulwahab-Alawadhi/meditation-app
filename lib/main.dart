@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meditation_app/pages/home_page.dart';
-import 'package:meditation_app/pages/second_home.dart';
+import 'package:meditation_app/pages/favoritesPage.dart';
+import 'package:meditation_app/pages/mother.dart';
+import 'package:meditation_app/pages/content_home.dart';
 import 'package:meditation_app/pages/signin_page.dart';
 import 'package:meditation_app/pages/signup_page.dart';
 
@@ -29,7 +30,9 @@ final GoRouter _router = GoRouter(
       path: '/home',
       name: "home",
       builder: (BuildContext context, GoRouterState state) {
-        return SecondHome();
+        return MotherPage(
+          userName: "howdy",
+        );
       },
     ),
   ],
