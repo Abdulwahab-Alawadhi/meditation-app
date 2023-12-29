@@ -11,18 +11,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 //  List<Cuisines> searchResults = [];
 
-  // void onSearchField(String query) {
-  //   setState(() {
-  //     if (query.isNotEmpty) {
-  //       searchResults = Cuisines.menuList
-  //           .where((dish) =>
-  //               dish.cuisineName.toLowerCase().contains(query.toLowerCase()))
-  //           .toList();
-  //     } else {
-  //       searchResults.clear();
-  //     }
-  //   });
-  // }
+//   void onSearchField(String query) {
+//     setState(() {
+//       if (query.isNotEmpty) {
+//         searchResults = Cuisines.menuList
+//             .where((dish) =>
+//                 dish.cuisineName.toLowerCase().contains(query.toLowerCase()))
+//             .toList();
+//       } else {
+//         searchResults.clear();
+//       }
+//     });
+//   }
 
   @override
   Widget build(BuildContext context) {

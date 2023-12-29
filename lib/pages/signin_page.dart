@@ -54,7 +54,8 @@ class SigninPage extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                    onPressed: () => context.go('/home'), child: Text("Login")),
+                    onPressed: () => context.pushNamed('home'),
+                    child: Text("Login")),
                 Padding(
                   padding: EdgeInsets.only(top: 15),
                   child: RichText(
