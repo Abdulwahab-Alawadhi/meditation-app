@@ -11,6 +11,8 @@
 //     );
 //   }
 // }
+//
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,7 +32,22 @@ class ContentHome extends StatelessWidget {
   }
 }
 
+class CardData {
+  final String title;
+  final IconData icon;
+  final String route;
+
+  CardData({required this.title, required this.icon, required this.route});
+}
+
 class CardList extends StatelessWidget {
+  final List<CardData> cards = [
+    CardData(title: 'Card 1', icon: Icons.star, route: 'signin'),
+    CardData(title: 'Card 2', icon: Icons.favorite, route: '/card2'),
+    CardData(title: 'Card 3', icon: Icons.mail, route: '/card3'),
+    CardData(title: 'Card 4', icon: Icons.music_note, route: '/card4'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,14 +58,18 @@ class CardList extends StatelessWidget {
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
         ),
-        itemCount: 4, // Number of cards
+        itemCount: cards.length, // Number of cards
         itemBuilder: (context, index) {
+          CardData card = cards[index];
           return InkWell(
             onTap: () {
-              // Handle the card click here
-              context.pushNamed("signin");
+              // Navigate to a new page when the card is clicked
+              context.pushNamed(card.route);
             },
-            child: CardItem(title: 'Card ${index + 1}', icon: Icons.star),
+            child: CardItem(
+              title: card.title,
+              icon: card.icon,
+            ),
           );
         },
       ),
