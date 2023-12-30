@@ -1,23 +1,8 @@
-// import 'package:flutter/material.dart';
-
-// class ContentHome extends StatelessWidget {
-//   const ContentHome({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         home: Scaffold(
-//       ),
-//     );
-//   }
-// }
-//
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ContentHome extends StatelessWidget {
-  const ContentHome({super.key});
+  const ContentHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +19,31 @@ class ContentHome extends StatelessWidget {
 
 class CardData {
   final String title;
-  final IconData icon;
+  final String imageUrl; // Change the type to String for the image URL
   final String route;
 
-  CardData({required this.title, required this.icon, required this.route});
+  CardData({required this.title, required this.imageUrl, required this.route});
 }
 
 class CardList extends StatelessWidget {
   final List<CardData> cards = [
-    CardData(title: 'Card 1', icon: Icons.star, route: 'signin'),
-    CardData(title: 'Card 2', icon: Icons.favorite, route: '/card2'),
-    CardData(title: 'Card 3', icon: Icons.mail, route: '/card3'),
-    CardData(title: 'Card 4', icon: Icons.music_note, route: '/card4'),
+    CardData(
+        title: 'cat',
+        imageUrl:
+            "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092",
+        route: '/details'),
+    CardData(
+        title: 'Card 2',
+        imageUrl: "https://example.com/image2.jpg",
+        route: '/details1'),
+    CardData(
+        title: 'Card 3',
+        imageUrl: "https://example.com/image3.jpg",
+        route: '/details2'),
+    CardData(
+        title: 'Card 4',
+        imageUrl: "https://example.com/image4.jpg",
+        route: '/details3'),
   ];
 
   @override
@@ -64,11 +62,11 @@ class CardList extends StatelessWidget {
           return InkWell(
             onTap: () {
               // Navigate to a new page when the card is clicked
-              context.pushNamed(card.route);
+              context.push(card.route);
             },
             child: CardItem(
               title: card.title,
-              icon: card.icon,
+              imageUrl: card.imageUrl,
             ),
           );
         },
@@ -79,32 +77,35 @@ class CardList extends StatelessWidget {
 
 class CardItem extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String imageUrl;
 
-  const CardItem({required this.title, required this.icon});
+  const CardItem({required this.title, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: Colors.blue),
-            SizedBox(height: 8),
-            Text(
-              title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ],
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 8),
+              Text(
+                title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(ContentHome());
 }

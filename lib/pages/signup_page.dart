@@ -1,9 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meditation_app/models/user.dart';
+import 'package:meditation_app/providers/auth_providers.dart';
+import 'package:provider/provider.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final usernameController = TextEditingController();
+
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,37 +47,40 @@ class SignupPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)),
                     labelText: 'Username',
                     hintText: 'Your Username'),
+                controller: usernameController,
               ),
             ),
 
             Padding(
               padding: EdgeInsets.only(top: 35, right: 35, left: 35),
               child: TextField(
-                cursorColor: Colors.amber,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    labelText: 'Email',
-                    hintText: 'Enter your Email'),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 35, right: 35, left: 35),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    labelText: 'Password',
-                    hintText: 'Enter Password'),
-              ),
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      labelText: 'Password',
+                      hintText: 'Enter Password'),
+                  controller: passwordController),
             ),
             SizedBox(height: 25),
             Column(
               children: [
                 ElevatedButton(
-                    onPressed: () => (context.pushNamed("home")),
+                    onPressed: () {
+                      final User user = User(
+                          username: usernameController.text,
+                          password: passwordController.text);
+                      context
+                          .read<AuthProvider>()
+                          .register(user: user)
+                          .then((token) {
+                        print(token);
+                        if (token.isNotEmpty) {
+                          context.push("/home");
+                        }
+                      });
+                    },
+                    // onPressed: () => (context.pushNamed("home")),
                     child: Text("Register")),
                 SizedBox(height: 25),
                 RichText(
@@ -75,10 +90,7 @@ class SignupPage extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: 'Login',
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                ;
-                              },
+                            recognizer: TapGestureRecognizer()..onTap = () {},
                             style: TextStyle(color: Colors.blue))
                       ]),
                 ),

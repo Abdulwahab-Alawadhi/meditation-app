@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meditation_app/pages/cards_pages.dart/meditation_details.dart';
+import 'package:meditation_app/pages/cards_pages.dart/music_details.dart';
+import 'package:meditation_app/pages/cards_pages.dart/tips_details.dart';
+import 'package:meditation_app/pages/cards_pages.dart/yoga_details.dart';
 import 'package:meditation_app/pages/favoritesPage.dart';
 import 'package:meditation_app/pages/mother.dart';
 import 'package:meditation_app/pages/content_home.dart';
 import 'package:meditation_app/pages/signin_page.dart';
 import 'package:meditation_app/pages/signup_page.dart';
+import 'package:meditation_app/providers/auth_providers.dart';
+import 'package:meditation_app/providers/excersise_provider.dart';
+import 'package:meditation_app/providers/tips_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TipsProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ExcercisesProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 final GoRouter _router = GoRouter(
@@ -33,6 +50,34 @@ final GoRouter _router = GoRouter(
         return MotherPage(
           userName: "howdy",
         );
+      },
+    ),
+    GoRoute(
+      path: '/details',
+      name: "details",
+      builder: (BuildContext context, GoRouterState state) {
+        return TipsDetails();
+      },
+    ),
+    GoRoute(
+      path: '/details1',
+      name: "details1",
+      builder: (BuildContext context, GoRouterState state) {
+        return MeditationDetails();
+      },
+    ),
+    GoRoute(
+      path: '/details2',
+      name: "details2",
+      builder: (BuildContext context, GoRouterState state) {
+        return YogaDetails();
+      },
+    ),
+    GoRoute(
+      path: '/details3',
+      name: "details3",
+      builder: (BuildContext context, GoRouterState state) {
+        return MusicDetails();
       },
     ),
   ],
