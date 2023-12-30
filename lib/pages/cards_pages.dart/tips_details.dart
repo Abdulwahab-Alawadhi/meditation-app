@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meditation_app/models/tip.dart';
-import 'package:meditation_app/pages/cards_pages.dart/add_tip.dart';
 import 'package:meditation_app/providers/tips_provider.dart';
 import 'package:provider/provider.dart';
 

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class AddTip extends StatelessWidget {
   AddTip({super.key});
 
-  var _tipTextController = TextEditingController();
+  final _tipTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
