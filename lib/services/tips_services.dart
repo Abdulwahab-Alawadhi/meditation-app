@@ -16,6 +16,22 @@ class TipsService {
     return [];
   }
 
+  // get MY TIPS
+  // Future<List<Tip>> getMyTips() async {
+  //   try {
+  //     final responseValue = await Client.get("/tips");
+  //     if (responseValue.statusCode == 200) {
+  //       final List<Tip> listoftips =
+  //           List.from(responseValue.data).map((e) => Tip.fromJson(e)).toList();
+  //       List<Tip> myTips = listoftips.where((tip) => tip.author == )
+  //       return listoftips;
+  //     }
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  //   return [];
+  // }
+
   // adding tips function
   Future<Tip> createTip({required Tip tip}) async {
     late Tip newTip;

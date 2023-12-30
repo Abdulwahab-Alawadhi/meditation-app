@@ -1,12 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:meditation_app/models/user.dart';
 import 'package:meditation_app/services/auth_services.dart';
+import 'package:meditation_app/services/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   final authService = AuthServices();
-  late User user;
+  User? user;
   String token = "";
 
   Future<String> register({required User user}) async {
@@ -43,16 +46,16 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // bool get isAuth {
-  //   readFromStorage();
-  //   if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
-  //     user = User.fromJson(Jwt.parseJwt(token));
-  //     print("isAuth token: $token");
-  //     print("I GOT THE USER IN ISAUTH: ${user.username}");
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  bool get isAuth {
+    readFromStorage();
+    print('im in auth and heres my token ||| $token');
+    if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
+      user = User.fromJson(Jwt.parseJwt(token));
 
-  // register({required User user}) {}
+      print("isAuth token: $token");
+      print("I GOT THE USER IN ISAUTH: ${user!.username}");
+      return true;
+    }
+    return false;
+  }
 }

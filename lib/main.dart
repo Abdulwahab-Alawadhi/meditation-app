@@ -10,6 +10,7 @@ import 'package:meditation_app/pages/signin_page.dart';
 import 'package:meditation_app/pages/signup_page.dart';
 import 'package:meditation_app/providers/auth_providers.dart';
 import 'package:meditation_app/providers/excersise_provider.dart';
+import 'package:meditation_app/providers/music_medi_provider.dart';
 import 'package:meditation_app/providers/tips_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => TipsProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ExcercisesProvider()),
+        ChangeNotifierProvider(create: (_) => MusicMediProvider()),
       ],
       child: MyApp(),
     ),
@@ -50,29 +52,29 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/details',
-      name: "details",
+      path: '/tips',
+      name: "tips",
       builder: (BuildContext context, GoRouterState state) {
         return TipsDetails();
       },
     ),
     GoRoute(
-      path: '/details1',
-      name: "details1",
+      path: '/meditation',
+      name: "meditation",
       builder: (BuildContext context, GoRouterState state) {
         return MeditationDetails();
       },
     ),
     GoRoute(
-      path: '/details2',
-      name: "details2",
+      path: '/exercise',
+      name: "exercise",
       builder: (BuildContext context, GoRouterState state) {
         return ExerciseDetails();
       },
     ),
     GoRoute(
-      path: '/details3',
-      name: "details3",
+      path: '/music',
+      name: "music",
       builder: (BuildContext context, GoRouterState state) {
         return MusicDetails();
       },
