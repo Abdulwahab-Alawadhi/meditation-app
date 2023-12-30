@@ -1,19 +1,30 @@
-import 'package:meditation_app/models/tips.dart';
+import 'package:meditation_app/models/tip.dart';
 import 'package:meditation_app/services/client.dart';
 
 class TipsService {
-  Future<List<ListTips>> getTips() async {
+  Future<List<Tip>> getTips() async {
     try {
       final responseValue = await Client.get("/tips");
       if (responseValue.statusCode == 200) {
-        final List<ListTips> listoftips = List.from(responseValue.data)
-            .map((e) => ListTips.fromJson(e))
-            .toList();
+        final List<Tip> listoftips =
+            List.from(responseValue.data).map((e) => Tip.fromJson(e)).toList();
         return listoftips;
       }
     } catch (e) {
       throw e.toString();
     }
     return [];
+  }
+
+  // adding tips function
+  Future<Tip> createTip({required Tip tip}) async {
+    late Tip newTip;
+    try {
+      var response = await Client.dio.post('/tips', data: tip.toJson());
+      newTip = Tip.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+    return newTip;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meditation_app/models/excersise.dart';
+import 'package:meditation_app/models/exercise.dart';
 import 'package:meditation_app/providers/excersise_provider.dart';
-import 'package:meditation_app/providers/tips_provider.dart';
 import 'package:provider/provider.dart';
 
 class MeditationDetails extends StatelessWidget {
@@ -44,13 +43,13 @@ class MeditationDetails extends StatelessWidget {
                   itemCount:
                       context.watch<ExcercisesProvider>().exercisesList.length,
                   itemBuilder: (context, index) {
-                    ExcersiseList exercises = context
+                    Exercise exercises = context
                         .watch<ExcercisesProvider>()
                         .exercisesList[index];
 
                     return Card(
                       child: ListTile(
-                        title: Text(exercises.title),
+                        title: Text(exercises.title ?? ''),
                         // subtitle: Text(exercises.id),
                       ),
                     );

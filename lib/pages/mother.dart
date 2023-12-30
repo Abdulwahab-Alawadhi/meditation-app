@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meditation_app/pages/favoritesPage.dart';
 import 'package:meditation_app/pages/content_home.dart';
+import 'package:meditation_app/pages/profilePage.dart';
 
 class MotherPage extends StatefulWidget {
-  MotherPage({super.key, required this.userName});
-  String userName;
+  MotherPage({
+    super.key,
+  });
 
   @override
   State<MotherPage> createState() => _HomePageState();
@@ -15,6 +17,7 @@ class _HomePageState extends State<MotherPage> {
   List<Widget> widgetList = [
     ContentHome(),
     FavoritePage(),
+    ProfilePage(),
     // BookedEvents(),
     // PointsCard(),
     // Profile(),
@@ -29,7 +32,7 @@ class _HomePageState extends State<MotherPage> {
           style: TextStyle(fontFamily: 'Times'),
         ),
         actions: [
-          Text('${widget.userName}'),
+          Text('username'),
           IconButton(icon: Icon(Icons.account_circle), onPressed: () {})
         ],
         centerTitle: true,

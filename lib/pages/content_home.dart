@@ -7,10 +7,8 @@ class ContentHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Cards Example'),
-        ),
         body: CardList(),
       ),
     );
@@ -48,6 +46,8 @@ class CardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // context.watch<AuthProvider>().isAuth;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: GridView.builder(

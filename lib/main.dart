@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meditation_app/pages/cards_pages.dart/add_tip.dart';
 import 'package:meditation_app/pages/cards_pages.dart/meditation_details.dart';
 import 'package:meditation_app/pages/cards_pages.dart/music_details.dart';
 import 'package:meditation_app/pages/cards_pages.dart/tips_details.dart';
-import 'package:meditation_app/pages/cards_pages.dart/yoga_details.dart';
-import 'package:meditation_app/pages/favoritesPage.dart';
+import 'package:meditation_app/pages/cards_pages.dart/exercise_details.dart';
 import 'package:meditation_app/pages/mother.dart';
-import 'package:meditation_app/pages/content_home.dart';
 import 'package:meditation_app/pages/signin_page.dart';
 import 'package:meditation_app/pages/signup_page.dart';
 import 'package:meditation_app/providers/auth_providers.dart';
@@ -47,9 +46,7 @@ final GoRouter _router = GoRouter(
       path: '/home',
       name: "home",
       builder: (BuildContext context, GoRouterState state) {
-        return MotherPage(
-          userName: "howdy",
-        );
+        return MotherPage();
       },
     ),
     GoRoute(
@@ -70,7 +67,7 @@ final GoRouter _router = GoRouter(
       path: '/details2',
       name: "details2",
       builder: (BuildContext context, GoRouterState state) {
-        return YogaDetails();
+        return ExerciseDetails();
       },
     ),
     GoRoute(
@@ -78,6 +75,13 @@ final GoRouter _router = GoRouter(
       name: "details3",
       builder: (BuildContext context, GoRouterState state) {
         return MusicDetails();
+      },
+    ),
+    GoRoute(
+      path: '/addTip',
+      name: "addTip",
+      builder: (BuildContext context, GoRouterState state) {
+        return AddTip();
       },
     ),
   ],

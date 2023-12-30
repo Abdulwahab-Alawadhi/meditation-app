@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:meditation_app/models/excersise.dart';
-import 'package:meditation_app/models/tips.dart';
+import 'package:meditation_app/models/exercise.dart';
 import 'package:meditation_app/services/excersise_servise.dart';
-import 'package:meditation_app/services/tips_services.dart';
 
 class ExcercisesProvider extends ChangeNotifier {
-  List<ExcersiseList> exercisesList = [];
+  List<Exercise> exercisesList = [];
   final ExcerciseService _exercisesService = ExcerciseService();
 
-  Future<List<ExcersiseList>> gettingExcercise() async {
+  Future<List<Exercise>> gettingExcercise() async {
     try {
       exercisesList = await _exercisesService.getExcercise();
       notifyListeners();
@@ -18,7 +16,7 @@ class ExcercisesProvider extends ChangeNotifier {
     }
   }
 
-  Future<List<ExcersiseList>> posttingExcercise() async {
+  Future<List<Exercise>> posttingExcercise() async {
     try {
       exercisesList = await _exercisesService.getExcercise();
       notifyListeners();
