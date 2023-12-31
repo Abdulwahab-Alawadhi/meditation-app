@@ -89,13 +89,26 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  // This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
+  //bool _isDarkMode = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        routerConfig: _router, debugShowCheckedModeBanner: false);
+      routerConfig: _router,
+      debugShowCheckedModeBanner: false,
+    );
   }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp.router(
+//         routerConfig: _router, debugShowCheckedModeBanner: false);
+//   }
 }
