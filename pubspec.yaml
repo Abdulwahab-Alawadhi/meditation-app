@@ -41,6 +41,7 @@ dependencies:
   jwt_decode: ^0.3.1
   json_serializable: ^6.7.1
   build_runner: ^2.4.7
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
