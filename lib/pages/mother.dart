@@ -28,8 +28,8 @@ class _HomePageState extends State<MotherPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Medititation',
-          style: TextStyle(fontFamily: 'Times'),
+          'Medititation App',
+          // style: TextStyle(fontFamily: 'Times'),
         ),
         actions: [
           Text('username'),
