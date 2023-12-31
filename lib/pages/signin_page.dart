@@ -77,7 +77,7 @@ class _SigninPageState extends State<SigninPage> {
                           .signin(user: user)
                           .then((token) {
                         if (token.isNotEmpty) {
-                          context.push("/home");
+                          context.push("/home", extra: user);
                         }
                       });
                     },

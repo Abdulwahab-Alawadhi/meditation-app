@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meditation_app/models/user.dart';
 import 'package:meditation_app/pages/cards_pages.dart/add_tip.dart';
 import 'package:meditation_app/pages/cards_pages.dart/meditation_details.dart';
 import 'package:meditation_app/pages/cards_pages.dart/music_details.dart';
@@ -48,7 +49,9 @@ final GoRouter _router = GoRouter(
       path: '/home',
       name: "home",
       builder: (BuildContext context, GoRouterState state) {
-        return MotherPage();
+        return MotherPage(
+          user: state.extra as User,
+        );
       },
     ),
     GoRoute(
