@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:meditation_app/models/tip.dart';
 import 'package:meditation_app/services/client.dart';
 
@@ -16,6 +17,31 @@ class TipsService {
     return [];
   }
 
+  Future<Tip> createTip({required Tip tip}) async {
+    late Tip newTip;
+    try {
+      var response = await Client.dio.post('/tips', data: tip.toJson());
+      newTip = Tip.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+    return newTip;
+  }
+
+  deleteTip(int id) async {
+    try {
+      final Response response = await Client.delete(
+        "/tips/$id",
+      );
+      return response;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+}
+
+
+
   // get MY TIPS
   // Future<List<Tip>> getMyTips() async {
   //   try {
@@ -33,14 +59,15 @@ class TipsService {
   // }
 
   // adding tips function
-  Future<Tip> createTip({required Tip tip}) async {
-    late Tip newTip;
-    try {
-      var response = await Client.dio.post('/tips', data: tip.toJson());
-      newTip = Tip.fromJson(response.data);
-    } catch (e) {
-      print(e);
-    }
-    return newTip;
-  }
-}
+  
+  // Future<Tip> deleteTip({required Tip tip}) async {
+  //   late Tip deleteTip;
+  //   try {
+  //     var response = await Client.dio.delete('/tips', data: tip.toJson());
+  //     deleteTip = Tip.fromJson(response.data);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   return ;
+  // }
+

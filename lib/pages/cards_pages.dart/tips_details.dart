@@ -108,6 +108,16 @@ class MyTipsTab extends StatelessWidget {
                   child: ListTile(
                     title: Text(tip.author ?? ''),
                     subtitle: Text(tip.text ?? ''),
+                    trailing: Wrap(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.read<TipsProvider>().deleteTip(tip.id);
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

@@ -21,4 +21,18 @@ class TipsProvider extends ChangeNotifier {
     tipsList.add(newTip);
     notifyListeners();
   }
+
+  Future<void> deleteTip(id) async {
+    print("Deleting tip with ID: $id");
+
+    try {
+      await _tipsService.deleteTip(id);
+      tipsList.removeWhere((tip) => tip.id == id);
+
+      print("Tip deleted successfully");
+      notifyListeners();
+    } catch (e) {
+      print("Error deleting tip: $e");
+    }
+  }
 }

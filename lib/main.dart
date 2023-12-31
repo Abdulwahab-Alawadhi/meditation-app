@@ -69,7 +69,7 @@ final GoRouter _router = GoRouter(
       path: '/exercise',
       name: "exercise",
       builder: (BuildContext context, GoRouterState state) {
-        return ExerciseDetails();
+        return ExcersisesDetails();
       },
     ),
     GoRoute(
