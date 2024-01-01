@@ -14,9 +14,6 @@ class _HomePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Favorites'),
-      ),
       body: Consumer<MusicMediProvider>(
         builder: (context, musicProvider, child) {
           List<Music> favoriteTracks = musicProvider.favoriteTracks;
@@ -36,7 +33,6 @@ class _HomePageState extends State<FavoritePage> {
                 color: Colors.lightBlue,
                 child: ListTile(
                   title: Text(currentTrack.title.toString()),
-                  subtitle: Text(currentTrack.file.toString()),
                 ),
               );
             },

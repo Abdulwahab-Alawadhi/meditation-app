@@ -8,8 +8,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool user = true;
-    //  context.watch<AuthProvider>().isAuth
+    bool user = context.watch<AuthProvider>().isAuth;
     return Scaffold(
         body: user
             ? Padding(
@@ -18,7 +17,7 @@ class ProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Username: ',
+                      'Username: ${context.watch<AuthProvider>().user!.username}',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),

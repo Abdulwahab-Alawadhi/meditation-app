@@ -15,17 +15,17 @@ class MusicMediProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool addToFavorites(musicId) {
-    Music music = musicTracks.firstWhere((music) => music.id == musicId);
-
+  bool addToFavorites(Music music) {
+    favoriteTracks = musicTracks.where((song) => song.id == music.id).toList();
+    print("My favorite tracks: $favoriteTracks");
     if (music != null) {
       favoriteTracks.add(music);
       notifyListeners();
       return true;
     }
-
     return false;
   }
+
 //  bool isFavorite(int trackId) {
 //     return favoriteTracks.contains(trackId);
 //   }

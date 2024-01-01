@@ -3,9 +3,15 @@ import 'package:meditation_app/models/music.dart';
 import 'package:meditation_app/providers/music_medi_provider.dart';
 import 'package:provider/provider.dart';
 
-class MusicDetails extends StatelessWidget {
-  const MusicDetails({Key? key}) : super(key: key);
+class MusicDetails extends StatefulWidget {
+  MusicDetails({Key? key}) : super(key: key);
 
+  bool isFav = false;
+  @override
+  State<MusicDetails> createState() => _MusicDetailsState();
+}
+
+class _MusicDetailsState extends State<MusicDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +48,10 @@ class MusicDetails extends StatelessWidget {
                           onPressed: () {
                             bool addedToFavorites = context
                                 .read<MusicMediProvider>()
-                                .addToFavorites(music.id);
-
+                                .addToFavorites(music);
+                            setState(() {
+                              widget.isFav = !widget.isFav;
+                            });
                             final snackBar = SnackBar(
                               content: Text(addedToFavorites
                                   ? 'Track ${music.id} has been added to favs'
@@ -53,7 +61,10 @@ class MusicDetails extends StatelessWidget {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           },
-                          icon: Icon(Icons.favorite),
+                          icon: Icon(
+                            Icons.favorite,
+                            color: widget.isFav ? Colors.red : Colors.grey,
+                          ),
                         ),
                       ],
                     ),

@@ -49,9 +49,7 @@ final GoRouter _router = GoRouter(
       path: '/home',
       name: "home",
       builder: (BuildContext context, GoRouterState state) {
-        return MotherPage(
-          user: state.extra as User,
-        );
+        return MotherPage();
       },
     ),
     GoRoute(

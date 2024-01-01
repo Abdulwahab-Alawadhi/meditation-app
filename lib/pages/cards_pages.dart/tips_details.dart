@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:meditation_app/models/tip.dart';
 import 'package:meditation_app/providers/auth_providers.dart';
 import 'package:meditation_app/providers/tips_provider.dart';
+import 'package:meditation_app/widgets/tip_card.dart';
 import 'package:provider/provider.dart';
 
 class TipsDetails extends StatefulWidget {
@@ -21,7 +22,6 @@ class _TipsDetailsState extends State<TipsDetails> {
         appBar: AppBar(
           title: Text('Meditation Tips'),
           elevation: 10,
-          backgroundColor: Colors.red,
           bottom: TabBar(tabs: [
             Tab(
               text: "All Tips",
@@ -47,10 +47,12 @@ class _TipsDetailsState extends State<TipsDetails> {
 }
 
 class AllTipsTab extends StatelessWidget {
-  const AllTipsTab({super.key});
+  AllTipsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print("TEST IN ALL TIPS ${context.watch<AuthProvider>().isAuth}");
+    var user = context.watch<AuthProvider>().user!.username;
     return FutureBuilder(
       future: context.read<TipsProvider>().gettingTips(),
       builder: (context, AsyncSnapshot snapshot) {
@@ -67,12 +69,7 @@ class AllTipsTab extends StatelessWidget {
               itemBuilder: (context, index) {
                 Tip tip = context.watch<TipsProvider>().tipsList[index];
 
-                return Card(
-                  child: ListTile(
-                    title: Text(tip.author ?? ''),
-                    subtitle: Text(tip.text ?? ''),
-                  ),
-                );
+                return TipCard(tip: tip, user: user);
               },
             );
           },
@@ -87,7 +84,15 @@ class MyTipsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(context.watch<AuthProvider>().user.username);
+    //! get the logged in username
+    var user = context.watch<AuthProvider>().user!.username;
+    // filtering the all tips list to only show my tips
+    List<Tip> myTips = context
+        .watch<TipsProvider>()
+        .tipsList
+        .where((tip) => tip.author == user)
+        .toList();
+
     return FutureBuilder(
       future: context.read<TipsProvider>().gettingTips(),
       builder: (context, AsyncSnapshot snapshot) {
@@ -100,26 +105,11 @@ class MyTipsTab extends StatelessWidget {
         return Consumer<TipsProvider>(
           builder: (context, value, child) {
             return ListView.builder(
-              itemCount: context.watch<TipsProvider>().tipsList.length,
+              itemCount: myTips.length,
               itemBuilder: (context, index) {
-                Tip tip = context.watch<TipsProvider>().tipsList[index];
+                Tip tip = myTips[index];
 
-                return Card(
-                  child: ListTile(
-                    title: Text(tip.author ?? ''),
-                    subtitle: Text(tip.text ?? ''),
-                    trailing: Wrap(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            context.read<TipsProvider>().deleteTip(tip.id);
-                          },
-                          icon: Icon(Icons.delete),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                return TipCard(tip: tip, user: user);
               },
             );
           },

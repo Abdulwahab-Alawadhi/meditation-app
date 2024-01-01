@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:meditation_app/models/user.dart';
 import 'package:meditation_app/services/auth_services.dart';
-import 'package:meditation_app/services/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -23,6 +20,7 @@ class AuthProvider extends ChangeNotifier {
   Future<String> signin({required User user}) async {
     token = await authService.login(user: user);
     saveTokenInStorage(token);
+    print("reached provider and logged in $token");
 
     /// token to be saved in local storage
     notifyListeners();
@@ -40,14 +38,13 @@ class AuthProvider extends ChangeNotifier {
   readFromStorage() async {
     SharedPreferences shared = await SharedPreferences.getInstance();
     token = shared.getString('token') ?? "";
-    print(token);
 
     /// ??  null check operator
-    notifyListeners();
+    // notifyListeners();
   }
 
   bool get isAuth {
-    readFromStorage();
+    // readFromStorage();
     print('im in auth and heres my token ||| $token');
     if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
       user = User.fromJson(Jwt.parseJwt(token));

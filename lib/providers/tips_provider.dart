@@ -9,7 +9,7 @@ class TipsProvider extends ChangeNotifier {
   Future<List<Tip>> gettingTips() async {
     try {
       tipsList = await _tipsService.getTips();
-      notifyListeners();
+      // notifyListeners();
       return tipsList;
     } catch (e) {
       throw e.toString();
@@ -22,7 +22,7 @@ class TipsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteTip(id) async {
+  Future<void> deleteTip(int id) async {
     print("Deleting tip with ID: $id");
 
     try {

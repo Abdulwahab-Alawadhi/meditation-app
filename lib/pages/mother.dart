@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:meditation_app/models/user.dart';
 import 'package:meditation_app/pages/favoritesPage.dart';
 import 'package:meditation_app/pages/content_home.dart';
 import 'package:meditation_app/pages/profilePage.dart';
+import 'package:meditation_app/providers/auth_providers.dart';
 import 'package:provider/provider.dart';
 
 class MotherPage extends StatefulWidget {
-  final User user;
-  MotherPage({Key? key, required this.user}) : super(key: key);
+  MotherPage({
+    super.key,
+  });
 
   @override
   State<MotherPage> createState() => _HomePageState();
@@ -19,37 +20,16 @@ class _HomePageState extends State<MotherPage> {
     ContentHome(),
     FavoritePage(),
     ProfilePage(),
-    // BookedEvents(),
-    // PointsCard(),
-    // Profile(),
   ];
-
-  bool _isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
-    User user = widget.user; // Access user variable from MotherPage
-    print("ggez" + user.toString());
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Meditation App',
+          'Medititation App',
+          // style: TextStyle(fontFamily: 'Times'),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            onPressed: () {},
-          ),
-          // IconButton(
-          //   icon: Icon(_isDarkMode ? Icons.brightness_7 : Icons.brightness_3),
-          //   onPressed: () {
-          //     setState(() {
-          //       _isDarkMode = !_isDarkMode;
-          //     });
-          //     _setTheme(_isDarkMode);
-          //   },
-          // ),
-        ],
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -73,67 +53,13 @@ class _HomePageState extends State<MotherPage> {
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle), label: "Profile"),
+            icon: Icon(Icons.supervised_user_circle),
+            label: 'Profile',
+          ),
         ],
       ),
       body: IndexedStack(children: widgetList, index: myIndex),
+      //
     );
   }
 }
-
-//   void _setTheme(bool isDarkMode) {
-//     ThemeData currentTheme = Theme.of(context);
-
-//     ThemeData newTheme = ThemeData(
-//       brightness: isDarkMode ? Brightness.dark : Brightness.light,
-//     );
-
-//     ThemeMode themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-
-//     context.read<ThemeProvider>().setTheme(newTheme, themeMode);
-//   }
-// }
-
-// class ThemeProvider extends ChangeNotifier {
-//   late ThemeData _currentTheme;
-//   late ThemeMode _currentThemeMode;
-
-//   ThemeProvider(
-//       {required ThemeData initialTheme, required ThemeMode initialThemeMode}) {
-//     _currentTheme = initialTheme;
-//     _currentThemeMode = initialThemeMode;
-//   }
-
-//   ThemeData get currentTheme => _currentTheme;
-//   ThemeMode get currentThemeMode => _currentThemeMode;
-
-//   void setTheme(ThemeData newTheme, ThemeMode newThemeMode) {
-//     _currentTheme = newTheme;
-//     _currentThemeMode = newThemeMode;
-//     notifyListeners();
-//   }
-// }
-
-// void main() {
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (context) => ThemeProvider(
-//         initialTheme: ThemeData.light(),
-//         initialThemeMode: ThemeMode.light,
-//       ),
-//       child: MyApp(),
-//     ),
-//   );
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: context.watch<ThemeProvider>().currentTheme,
-//       darkTheme: ThemeData.dark(),
-//       themeMode: context.watch<ThemeProvider>().currentThemeMode,
-//       home: MotherPage(user: ),
-//     );
-//   }
-// }

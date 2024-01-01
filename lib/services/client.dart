@@ -20,7 +20,7 @@ class Client {
   static Future<Response> get(String path) async {
     await addAuthToken();
     try {
-      print(dio.options.headers['Authorization'].toString());
+      // print(dio.options.headers['Authorization'].toString());
       return await dio.get(path);
     } catch (error) {
       throw error.toString();
@@ -30,7 +30,7 @@ class Client {
   static Future<Response> put(String path) async {
     await addAuthToken();
     try {
-      print(dio.options.headers['Authorization'].toString());
+      // print(dio.options.headers['Authorization'].toString());
       return await dio.put(path);
     } catch (error) {
       throw error.toString();
@@ -40,7 +40,7 @@ class Client {
   static Future<Response> post(String path) async {
     await addAuthToken();
     try {
-      print(dio.options.headers['Authorization'].toString());
+      // print(dio.options.headers['Authorization'].toString());
       return await dio.post(path);
     } catch (error) {
       throw error.toString();
@@ -50,7 +50,7 @@ class Client {
   static Future<Response> delete(String path) async {
     await addAuthToken();
     try {
-      print(dio.options.headers['Authorization'].toString());
+      // print(dio.options.headers['Authorization'].toString());
       return await dio.delete(path);
     } catch (error) {
       throw error.toString();

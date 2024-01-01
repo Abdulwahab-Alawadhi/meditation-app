@@ -4,7 +4,7 @@ import 'package:meditation_app/services/client.dart';
 class ExcerciseService {
   Future<List<Exercise>> getExcercise() async {
     try {
-      final responseValue = await Client.get("/exercises");
+      final responseValue = await Client.get("/exercise");
       if (responseValue.statusCode == 200) {
         final List<Exercise> listofexercises = List.from(responseValue.data)
             .map((e) => Exercise.fromJson(e))
