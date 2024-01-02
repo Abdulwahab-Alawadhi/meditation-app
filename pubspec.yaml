@@ -42,7 +42,7 @@ dependencies:
   audioplayers: ^0.20.1
   #image_picker: ^1.0.5
   image_picker: ^0.8.4+2
-  flutter_search_bar: ^2.0.0
+  flutter_search_bar: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
