@@ -65,9 +65,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/undraw_Meditating_re_aiqa.png
+    - assets/images/yogapose_Meditation_re_gll0.png
+    - assets/images/undraw_Yoga_re_i5ld.png
+    - assets/images/undraw_Mindfulness_8gqa.png
+    - assets/images/undraw_Female_avatar_efig.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

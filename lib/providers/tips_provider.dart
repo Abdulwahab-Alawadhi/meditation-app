@@ -35,4 +35,14 @@ class TipsProvider extends ChangeNotifier {
       print("Error deleting tip: $e");
     }
   }
+
+  Future<void> upvoteTip(int id) async {
+    await _tipsService.upVote(id);
+    await gettingTips();
+  }
+
+  Future<void> downvoteTip(int id) async {
+    await _tipsService.downVote(id);
+    await gettingTips();
+  }
 }

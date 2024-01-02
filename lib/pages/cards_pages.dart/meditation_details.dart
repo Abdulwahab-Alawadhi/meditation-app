@@ -35,7 +35,7 @@ class _MeditationDetailsState extends State<MeditationDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Meditation videos'),
+        title: Text('Meditation Sessions'),
         elevation: 10,
         // backgroundColor: Colors.red,
       ),

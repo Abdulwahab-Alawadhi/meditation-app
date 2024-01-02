@@ -58,7 +58,7 @@ class _MusicDetailsState extends State<MusicDetails> {
                     return Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Card(
-                        color: Colors.cyan,
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         child: Column(
                           children: [
                             Row(
@@ -124,7 +124,7 @@ class _MusicDetailsState extends State<MusicDetails> {
     );
   }
 
-  void _playMusic(String url) {
+  void _playMusic(url) {
     if (_isPlaying) {
       _audioPlayer.stop();
     }

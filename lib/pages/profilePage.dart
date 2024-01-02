@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
                     CircleAvatar(
                       radius: 70,
                       backgroundImage: NetworkImage(
-                          'https://cucucovers.com/cdn/shop/products/000590a-6_8c6dc7b8-8a00-4f32-82c4-30e4cfa1800b_1500x.png?v=1581094062'),
+                          'assets/images/undraw_Female_avatar_efig.png'),
                     ),
                     SizedBox(height: 16),
                     Text(

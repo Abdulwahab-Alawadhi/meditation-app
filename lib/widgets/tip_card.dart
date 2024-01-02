@@ -57,7 +57,25 @@ class TipCard extends StatelessWidget {
                         color: Colors.red[800],
                       ),
                     )
-                  : SizedBox()
+                  : SizedBox(),
+              IconButton(
+                onPressed: () {
+                  context.read<TipsProvider>().upvoteTip(tip.id!);
+                },
+                icon: Icon(
+                  Icons.arrow_upward,
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  context.read<TipsProvider>().downvoteTip(tip.id!);
+                },
+                icon: Icon(
+                  Icons.arrow_downward,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              )
             ],
           ),
         ),

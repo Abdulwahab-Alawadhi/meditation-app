@@ -38,6 +38,28 @@ class TipsService {
       throw e.toString();
     }
   }
+
+  upVote(int id) async {
+    try {
+      final Response response = await Client.put(
+        "/tips/$id/upvote",
+      );
+      return response;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  downVote(int id) async {
+    try {
+      final Response response = await Client.put(
+        "/tips/$id/downvote",
+      );
+      return response;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }
 
 
