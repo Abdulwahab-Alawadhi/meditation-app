@@ -25,14 +25,14 @@ class _HomePageState extends State<MotherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Medititation App',
-          // style: TextStyle(fontFamily: 'Times'),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     'Medititation App',
+      //     // style: TextStyle(fontFamily: 'Times'),
+      //   ),
+      //   centerTitle: true,
+      //   automaticallyImplyLeading: false,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {

@@ -28,11 +28,28 @@ class _HomePageState extends State<FavoritePage> {
             itemCount: favoriteTracks.length,
             itemBuilder: (context, index) {
               Music currentTrack = favoriteTracks[index];
-
+              Music music =
+                  context.watch<MusicMediProvider>().musicTracks[index];
               return Card(
                 color: Colors.lightBlue,
                 child: ListTile(
                   title: Text(currentTrack.title.toString()),
+                  trailing: IconButton(
+                    onPressed: () {
+                      bool addedToFavorites = context
+                          .read<MusicMediProvider>()
+                          .removeFromFavorites(music.id);
+
+                      final snackBar = SnackBar(
+                        content: Text(addedToFavorites
+                            ? 'Track ${music.id} has been removed from favs'
+                            : 'Something went wrong!'),
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
                 ),
               );
             },

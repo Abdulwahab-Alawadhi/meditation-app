@@ -15,16 +15,4 @@ class ExcercisesProvider extends ChangeNotifier {
       throw e.toString();
     }
   }
-
-  Future<List<Exercise>> posttingExcercise() async {
-    try {
-      exercisesList = await _exercisesService.getExcercise();
-      notifyListeners();
-      return exercisesList;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
-
-  getExcercise() {}
 }

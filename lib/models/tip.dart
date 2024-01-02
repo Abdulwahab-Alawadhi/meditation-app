@@ -21,5 +21,7 @@ class Tip {
   });
 
   factory Tip.fromJson(Map<String, dynamic> json) => _$TipFromJson(json);
+
+  get title => null;
   Map<String, dynamic> toJson() => _$TipToJson(this);
 }

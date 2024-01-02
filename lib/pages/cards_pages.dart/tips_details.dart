@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:meditation_app/models/tip.dart';
 import 'package:meditation_app/providers/auth_providers.dart';
 import 'package:meditation_app/providers/tips_provider.dart';
 import 'package:meditation_app/widgets/tip_card.dart';
-import 'package:provider/provider.dart';
 
 class TipsDetails extends StatefulWidget {
-  const TipsDetails({super.key});
+  const TipsDetails({Key? key}) : super(key: key);
 
   @override
   State<TipsDetails> createState() => _TipsDetailsState();
@@ -46,47 +46,86 @@ class _TipsDetailsState extends State<TipsDetails> {
   }
 }
 
-class AllTipsTab extends StatelessWidget {
-  AllTipsTab({super.key});
+class AllTipsTab extends StatefulWidget {
+  AllTipsTab({Key? key}) : super(key: key);
+
+  @override
+  State<AllTipsTab> createState() => _AllTipsTabState();
+}
+
+class _AllTipsTabState extends State<AllTipsTab> {
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print("TEST IN ALL TIPS ${context.watch<AuthProvider>().isAuth}");
     var user = context.watch<AuthProvider>().user!.username;
-    return FutureBuilder(
-      future: context.read<TipsProvider>().gettingTips(),
-      builder: (context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: _searchController,
+            onChanged: (value) {
+              setState(() {});
+            },
+            decoration: InputDecoration(
+              hintText: 'Search by text or author...',
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
+        Expanded(
+          child: FutureBuilder(
+            future: context.read<TipsProvider>().gettingTips(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-        return Consumer<TipsProvider>(
-          builder: (context, value, child) {
-            return ListView.builder(
-              itemCount: context.watch<TipsProvider>().tipsList.length,
-              itemBuilder: (context, index) {
-                Tip tip = context.watch<TipsProvider>().tipsList[index];
+              List<Tip> filteredTips =
+                  getFilteredTips(context, _searchController.text);
 
-                return TipCard(tip: tip, user: user);
-              },
-            );
-          },
-        );
-      },
+              return ListView.builder(
+                itemCount: filteredTips.length,
+                itemBuilder: (context, index) {
+                  Tip tip = filteredTips[index];
+                  return TipCard(tip: tip, user: user);
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
+  }
+
+  List<Tip> getFilteredTips(BuildContext context, String searchQuery) {
+    List<Tip> allTips = context.read<TipsProvider>().tipsList;
+    return allTips
+        .where((tip) =>
+            (tip.text?.toLowerCase() ?? '')
+                .contains(searchQuery.toLowerCase()) ||
+            (tip.author?.toLowerCase() ?? '')
+                .contains(searchQuery.toLowerCase()))
+        .toList();
   }
 }
 
 class MyTipsTab extends StatelessWidget {
-  MyTipsTab({super.key});
+  MyTipsTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //! get the logged in username
     var user = context.watch<AuthProvider>().user!.username;
-    // filtering the all tips list to only show my tips
     List<Tip> myTips = context
         .watch<TipsProvider>()
         .tipsList
@@ -108,7 +147,6 @@ class MyTipsTab extends StatelessWidget {
               itemCount: myTips.length,
               itemBuilder: (context, index) {
                 Tip tip = myTips[index];
-
                 return TipCard(tip: tip, user: user);
               },
             );

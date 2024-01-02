@@ -19,7 +19,7 @@ class _MeditationDetailsState extends State<MeditationDetails> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-      'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+      '',
     )..initialize().then((_) {
         setState(() {});
       });
@@ -35,9 +35,9 @@ class _MeditationDetailsState extends State<MeditationDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Meditation meow'),
+        title: Text('Meditation videos'),
         elevation: 10,
-        backgroundColor: Colors.red,
+        // backgroundColor: Colors.red,
       ),
       body: FutureBuilder(
         future: context.read<MusicMediProvider>().getMeditation(),
@@ -63,7 +63,13 @@ class _MeditationDetailsState extends State<MeditationDetails> {
                       children: [
                         Row(
                           children: [
-                            Text(meditation.title!),
+                            Text(
+                              meditation.title!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, fontSize: 20),
+                            ),
+
+                            // Text(meditation.title!)
                           ],
                         ),
                         if (_isDropdownVisible)
@@ -71,19 +77,25 @@ class _MeditationDetailsState extends State<MeditationDetails> {
                             aspectRatio: _controller.value.aspectRatio,
                             child: VideoPlayer(_controller),
                           ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _isDropdownVisible = !_isDropdownVisible;
-                              if (_isDropdownVisible) {
-                                _controller.play();
-                              } else {
-                                _controller.pause();
-                              }
-                            });
-                          },
-                          child: Text(
-                              _isDropdownVisible ? 'Hide Video' : 'Show Video'),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                            icon: Icon(
+                              _isDropdownVisible
+                                  ? Icons.arrow_drop_up
+                                  : Icons.arrow_drop_down,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isDropdownVisible = !_isDropdownVisible;
+                                if (_isDropdownVisible) {
+                                  _controller.play();
+                                } else {
+                                  _controller.pause();
+                                }
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),

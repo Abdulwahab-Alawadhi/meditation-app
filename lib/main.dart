@@ -70,7 +70,7 @@ final GoRouter _router = GoRouter(
       path: '/exercise',
       name: "exercise",
       builder: (BuildContext context, GoRouterState state) {
-        return ExcersisesDetails();
+        return ExercisesDetails();
       },
     ),
     GoRoute(
@@ -96,20 +96,36 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //bool _isDarkMode = false;
+  bool _isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _router,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Meditation App'),
+            actions: [
+              IconButton(
+                icon: _isDarkMode
+                    ? Icon(Icons.nightlight_round)
+                    : Icon(Icons.wb_sunny),
+                onPressed: () {
+                  setState(() {
+                    _isDarkMode = !_isDarkMode;
+                  });
+                },
+              ),
+            ],
+          ),
+          body: child,
+        );
+      },
     );
   }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp.router(
-//         routerConfig: _router, debugShowCheckedModeBanner: false);
-//   }
 }
